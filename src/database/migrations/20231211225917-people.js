@@ -4,13 +4,21 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('People', {
+      id: {
+        primaryKey: true,
+        allowNull: false,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
+      },
       name: {
         allowNull: false,
         type: Sequelize.STRING(150),
       },
       document: {
           primaryKey: true,
-          type: Sequelize.INTEGER,
+          type: Sequelize.STRING,
           allowNull: false,
           onUpdate: 'CASCADE',
           onDelete: 'RESTRICT'

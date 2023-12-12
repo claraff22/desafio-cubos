@@ -1,5 +1,5 @@
 import { Model, DataTypes, Sequelize} from "sequelize";
-
+import config from '../config/database'
 
 interface AccountsTypes {
   id: string;
@@ -18,6 +18,8 @@ export default class Accounts extends Model<AccountsTypes> implements AccountsTy
     createdAt!: Date;
     updatedAt!: Date;
 }
+
+const sequelize = new Sequelize(config) 
 
 Accounts.init({
     id: {
@@ -53,7 +55,7 @@ Accounts.init({
     },
 
 }, {
-    sequelize: new Sequelize(),
+    sequelize: sequelize,
     modelName: 'Account',
     timestamps: false,
     freezeTableName: true,

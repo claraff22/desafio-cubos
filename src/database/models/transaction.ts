@@ -1,4 +1,5 @@
 import { Model, DataTypes, Sequelize} from "sequelize";
+import config from '../config/database'
 
 
 interface TransactionTypes {
@@ -16,6 +17,8 @@ export default class Transaction extends Model<TransactionTypes> implements Tran
     createdAt!: Date;
     updatedAt!: Date;
 }
+
+const sequelize = new Sequelize(config)
 
 Transaction.init({
     id: {
@@ -45,7 +48,7 @@ Transaction.init({
     },
 
 }, {
-    sequelize: new Sequelize(),
+    sequelize: sequelize,
     modelName: 'Transaction',
     timestamps: false,
     freezeTableName: true,

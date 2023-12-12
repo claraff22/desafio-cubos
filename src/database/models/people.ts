@@ -1,30 +1,42 @@
 import { Model, DataTypes, Sequelize} from "sequelize";
+import config from '../config/database'
 
-
-interface PeopleTypes {
+export interface PeopleTypes {
+  id: string;
   name: string;
-  document: number;
+  document: string;
   password: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
 export default class People extends Model<PeopleTypes> implements PeopleTypes {
+    id!: string;
     name!: string;
-    document!: number;
+    document!: string;
     password!: string;
     createdAt!: Date;
     updatedAt!: Date;
 }
 
+const sequelize = new Sequelize(config) 
+
 People.init({
+  id: {
+    primaryKey: true,
+    allowNull: false,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    onUpdate: 'CASCADE',
+    onDelete: 'RESTRICT'
+  },
     name: {
         allowNull: false,
         type: DataTypes.STRING(150),
       },
     document: {
         primaryKey: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
@@ -45,8 +57,8 @@ People.init({
     },
 
 }, {
-    sequelize: new Sequelize(),
-    modelName: 'people',
+    sequelize: sequelize,
+    modelName: 'People',
     timestamps: false,
     freezeTableName: true,
 })

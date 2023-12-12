@@ -1,5 +1,6 @@
 import express, { Application, Request, Response} from 'express';
 import 'dotenv/config'
+import { router } from './router';
 
 
 class App {
@@ -17,6 +18,7 @@ class App {
   };
 
   private router(): void {
+    this.app.use(router)
     this.app.get('/', (req: Request,
       res: Response) => res.json({ ok: true }));
   }

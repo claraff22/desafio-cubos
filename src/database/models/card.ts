@@ -1,4 +1,5 @@
 import { Model, DataTypes, Sequelize} from "sequelize";
+import config from '../config/database'
 
 enum cardTypeEnum {
     'physical', 'virtual'
@@ -21,6 +22,8 @@ export default class Card extends Model<CardTypes> implements CardTypes {
     createdAt!: Date;
     updatedAt!: Date;
 }
+
+const sequelize = new Sequelize(config) 
 
 Card.init({
     id: {
@@ -55,7 +58,7 @@ Card.init({
     },
 
 }, {
-    sequelize: new Sequelize(),
+    sequelize: sequelize,
     modelName: 'Card',
     timestamps: false,
     freezeTableName: true,
