@@ -26,7 +26,7 @@ module.exports = {
     balance: {
       allowNull: true,
       type: Sequelize.FLOAT,
-      defaultValue: '0.00'
+      defaultValue: 500.00
     },
     createdAt: {
       allowNull: false,

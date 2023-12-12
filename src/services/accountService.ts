@@ -49,6 +49,19 @@ class AccountService {
            return res.json({error: error})
         }
     }
+
+    public async getBalance(req: Request, res: Response) {
+        const id = req.params
+
+        try {
+            const balance = await Accounts.findByPk(id.accountId, {attributes: ['balance']})
+            return res.json(balance)
+        } catch (error) {
+            return res.json({error: error})
+        }
+    }
+
+    
 }
 
 export const account = new AccountService()

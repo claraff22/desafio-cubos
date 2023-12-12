@@ -12,11 +12,12 @@ accountRoute.post('/:accountId/cards', card.createCard)
 accountRoute.get('/:accountId/cards', card.getAllCards )
 accountRoute.get('/cards', card.AllCardsPeople)
 
-accountRoute.post(':accountId/transactions')
-accountRoute.get(':accountId/transactions')
-accountRoute.get(':accountId/transactions')
+accountRoute.post('/:accountId/transactions')
+accountRoute.get('/:accountId/transactions')
+accountRoute.get('/:accountId/transactions')
 
-accountRoute.get(':accountId/balance')
+
+accountRoute.get('/:accountId/balance', account.getBalance)
 
 
 

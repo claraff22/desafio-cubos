@@ -44,7 +44,7 @@ Accounts.init({
     balance: {
       allowNull: true,
       type: DataTypes.FLOAT,
-      defaultValue: 0.00
+      defaultValue: 500.0,
     },
     createdAt: {
       allowNull: false,
