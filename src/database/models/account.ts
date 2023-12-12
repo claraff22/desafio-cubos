@@ -1,22 +1,24 @@
 import { Model, DataTypes, Sequelize} from "sequelize";
 import config from '../config/database'
 
-interface AccountsTypes {
+export interface AccountsTypes {
   id: string;
-  branch: number;
+  branch: string;
   account: string;
   balance: number;
   createdAt: Date;
   updatedAt: Date;
+  people_ID: string;
 }
 
 export default class Accounts extends Model<AccountsTypes> implements AccountsTypes {
     id!: string;
-    branch!: number;
+    branch!: string;
     account!: string;
     balance!: number;
     createdAt!: Date;
     updatedAt!: Date;
+    people_ID!: string;
 }
 
 const sequelize = new Sequelize(config) 
@@ -31,12 +33,12 @@ Accounts.init({
         onDelete: 'RESTRICT'
       },
     branch: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,   
     },
     account: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         unique: true
     },
     balance: {
@@ -51,8 +53,17 @@ Accounts.init({
     },
     updatedAt: {
       allowNull: true,
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
     },
+    people_ID: {
+      allowNull: false,
+      type: DataTypes.UUID,
+      references: {
+        model: 'People',
+        key: 'id'
+      }
+    }
 
 }, {
     sequelize: sequelize,

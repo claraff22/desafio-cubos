@@ -14,13 +14,13 @@ module.exports = {
       onDelete: 'RESTRICT'
     },
     branch: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING(3),
       allowNull: false,
       
     },
     account: {
       allowNull: false,
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       unique: true
     },
     balance: {
@@ -35,8 +35,18 @@ module.exports = {
     },
     updatedAt: {
       allowNull: true,
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     }, 
+    people_ID: {
+      allowNull: false,
+      type: Sequelize.UUID,
+      references: {
+        model: 'People',
+        key: 'id'
+      }
+    }
+
     });
     
   },

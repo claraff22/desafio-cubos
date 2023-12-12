@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import People, {PeopleTypes} from "../database/models/people"
 import 'dotenv/config'
 import bcrypt from 'bcrypt'
-import jwt from  'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 
 class PeopleService {
     public async createPeople(req: Request, res: Response){

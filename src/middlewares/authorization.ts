@@ -9,6 +9,7 @@ class AuthorizationMiddleware {
         try {
             const token = authorization!.split(' ')[1]
             const verifyToken = jwt.verify(token, process.env.JWT_TOKEN!)
+            res.locals.verifyToken = verifyToken
             next()
         } catch (error) {
             return res.status(401).json({error: 'Unathourized access '})  

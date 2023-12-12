@@ -5,7 +5,7 @@ import { authorization } from "../middlewares/authorization"
 const accountRoute: Router = Router()
 
 accountRoute.post('/', authorization.authorization, account.createAccount )
-accountRoute.get('/', )
+accountRoute.get('/', authorization.authorization, account.getAccount)
 
 accountRoute.post('/:accountId/cards')
 accountRoute.get('/:accountId/cards')
