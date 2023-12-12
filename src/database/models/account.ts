@@ -25,14 +25,14 @@ Accounts.init({
     id: {
         primaryKey: true,
         allowNull: false,
-        type: DataTypes.STRING(150),
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
       },
     branch: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        
+        allowNull: false,   
     },
     account: {
         allowNull: false,

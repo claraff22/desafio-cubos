@@ -7,7 +7,8 @@ module.exports = {
       id: {
         primaryKey: true,
         allowNull: false,
-        type: Sequelize.STRING(150),
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
       },

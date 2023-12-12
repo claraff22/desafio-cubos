@@ -24,7 +24,8 @@ Transaction.init({
     id: {
         primaryKey: true,
         allowNull: false,
-        type: DataTypes.STRING(150),
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
       },

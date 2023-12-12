@@ -17,11 +17,9 @@ module.exports = {
         type: Sequelize.STRING(150),
       },
       document: {
-          primaryKey: true,
-          type: Sequelize.STRING,
+          type: Sequelize.STRING(14),
           allowNull: false,
-          onUpdate: 'CASCADE',
-          onDelete: 'RESTRICT'
+          unique: true
       },
       password: {
           allowNull: false,

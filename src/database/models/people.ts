@@ -22,24 +22,22 @@ export default class People extends Model<PeopleTypes> implements PeopleTypes {
 const sequelize = new Sequelize(config) 
 
 People.init({
-  id: {
-    primaryKey: true,
-    allowNull: false,
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    onUpdate: 'CASCADE',
-    onDelete: 'RESTRICT'
-  },
+    id: {
+      primaryKey: true,
+      allowNull: false,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      onUpdate: 'CASCADE',
+      onDelete: 'RESTRICT'
+    },
     name: {
         allowNull: false,
         type: DataTypes.STRING(150),
       },
     document: {
-        primaryKey: true,
-        type: DataTypes.STRING,
-        allowNull: false,
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
+      type: DataTypes.STRING(14),
+      allowNull: false,
+      unique: true,
     },
     password: {
         allowNull: false,
