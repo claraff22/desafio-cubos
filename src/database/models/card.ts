@@ -1,0 +1,62 @@
+import { Model, DataTypes, Sequelize} from "sequelize";
+
+enum cardTypeEnum {
+    'physical', 'virtual'
+}
+
+interface CardTypes {
+  id: string;
+  type: cardTypeEnum;
+  number: string;
+  cvv: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export default class Card extends Model<CardTypes> implements CardTypes {
+    id!: string;
+    type!: number;
+    number!: string;
+    cvv!: number;
+    createdAt!: Date;
+    updatedAt!: Date;
+}
+
+Card.init({
+    id: {
+        primaryKey: true,
+        allowNull: false,
+        type: DataTypes.STRING(150),
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
+      },
+    type: {
+        type: DataTypes.ENUM('physical, virtual'),
+        allowNull: false,
+        
+    },
+    number: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+    },
+    cvv: {
+        allowNull: false,
+        type: DataTypes.INTEGER
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    updatedAt: {
+      allowNull: true,
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+
+}, {
+    sequelize: new Sequelize(),
+    modelName: 'Card',
+    timestamps: false,
+    freezeTableName: true,
+})
