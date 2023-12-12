@@ -1,9 +1,10 @@
 import { Router } from "express"
 import { account } from "../services/accountService"
+import { authorization } from "../middlewares/authorization"
 
 const accountRoute: Router = Router()
 
-accountRoute.post('/', account.createAccount )
+accountRoute.post('/', authorization.authorization, account.createAccount )
 accountRoute.get('/', )
 
 accountRoute.post('/:accountId/cards')
