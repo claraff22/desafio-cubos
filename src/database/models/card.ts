@@ -1,26 +1,31 @@
 import { Model, DataTypes, Sequelize} from "sequelize";
 import config from '../config/database'
+import Accounts from "./account";
+import { ForeignKey } from "sequelize-typescript";
 
-enum cardTypeEnum {
-    'physical', 'virtual'
-}
+// enum cardTypeEnum {
+//    'physical' , 
+//     'virtual'
+// }
 
-interface CardTypes {
+export interface CardTypes {
   id: string;
-  type: cardTypeEnum;
+  type: string;
   number: string;
-  cvv: number;
+  cvv: string;
   createdAt: Date;
   updatedAt: Date;
+  account_ID: string;
 }
 
 export default class Card extends Model<CardTypes> implements CardTypes {
     id!: string;
-    type!: number;
+    type!: string;
     number!: string;
-    cvv!: number;
+    cvv!: string;
     createdAt!: Date;
     updatedAt!: Date;
+    account_ID!: string;
 }
 
 const sequelize = new Sequelize(config) 
@@ -35,16 +40,19 @@ Card.init({
         onDelete: 'RESTRICT'
       },
     type: {
-        type: DataTypes.ENUM('physical, virtual'),
         allowNull: false, 
+        type: DataTypes.STRING,
+        validate: {
+          isIn: [['physical', 'virtual']],
+        },
     },
     number: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
     },
     cvv: {
         allowNull: false,
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING
     },
     createdAt: {
       allowNull: false,
@@ -56,6 +64,14 @@ Card.init({
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
     },
+    account_ID: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      references: {
+        model: 'Account',
+        key: 'id'
+      }
+    }
 
 }, {
     sequelize: sequelize,
@@ -63,3 +79,5 @@ Card.init({
     timestamps: false,
     freezeTableName: true,
 })
+
+Accounts.hasMany(Card, {foreignKey: 'account_ID'})

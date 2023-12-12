@@ -14,17 +14,19 @@ module.exports = {
         onDelete: 'RESTRICT'
       },
     type: {
-        type: Sequelize.ENUM('physical, virtual'),
+        type: Sequelize.STRING,
         allowNull: false,
-        
+        validate: {
+          isIn: [['physical', 'virtual']],
+        },
     },
     number: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
     },
     cvv: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
     },
     createdAt: {
       allowNull: false,
@@ -36,6 +38,14 @@ module.exports = {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
     },
+    account_ID: {
+      allowNull: false,
+      type: Sequelize.UUID,
+      references: {
+        model: 'Account',
+        key: 'id'
+      }
+    }
     });
      
   },
