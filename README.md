@@ -13,10 +13,10 @@ Este projeto foi desenvolvido como parte do desafio técnico proposto.
 ### Instruções
 1. Substituir dados no arquivo ".env";
 2. Execução dos comandos:
-   npm install
-   npm run build
-   npx sequelize-cli db:migrate
-   npm run dev
+   - npm install
+   - npm run build
+   - npx sequelize-cli db:migrate
+   - npm run dev
 
 ##### Observações
 A rota POST /accounts/:accountId/transactions, foi levemente alterada para atender aos requisitos de funcionalidade. Sendo adcionado a coluna "type" com valores possíveis de "debit" ou 
