@@ -43,7 +43,7 @@ class CardService {
             return res.json({newCard})
         } catch (error) {
             console.log(error)
-            return res.json({error: error})
+            return res.status(500).json({error: error})
         }
     }
 
@@ -64,7 +64,7 @@ class CardService {
 
             return res.json({cards: allCardsAccount})
         } catch (error) {
-            return res.json({error: error})
+            return res.status(500).json({error: error})
         }
     }
 
@@ -88,7 +88,7 @@ class CardService {
             return res.json({ getAllCardPeople})
         } catch (error) {
             console.log(error)
-            return res.json({error: error})
+            return res.status(500).json({error: error})
         }
     }
 

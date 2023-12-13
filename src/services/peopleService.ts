@@ -35,7 +35,7 @@ class PeopleService {
 
                 return res.json({response: newPeople})
             } catch (error) {
-                return res.json({error: error})
+                return res.status(500).json({error: error})
             }
         } else {
             return res.status(400).json({error: 'people already exists'})

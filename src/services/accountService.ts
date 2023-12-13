@@ -28,7 +28,7 @@ class AccountService {
              res.json({response: newAccount})
 
         } catch (error) {
-            return res.json({error: error})
+            return res.status(500).json({error: error})
         }
         
     }
@@ -46,7 +46,7 @@ class AccountService {
 
             return res.json({accounts: getAccounts})
         } catch (error) {
-           return res.json({error: error})
+            return res.status(500).json({error: error})
         }
     }
 
@@ -57,7 +57,7 @@ class AccountService {
             const balance = await Accounts.findByPk(id.accountId, {attributes: ['balance']})
             return res.json(balance)
         } catch (error) {
-            return res.json({error: error})
+            return res.status(500).json({error: error})
         }
     }
     

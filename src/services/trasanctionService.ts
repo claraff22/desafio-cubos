@@ -42,7 +42,7 @@ class TransactionService {
             return res.json({newTransaction})
 
         } catch (error) {
-            return res.json({error: error})
+            return res.status(500).json({error: error})
         }
     }
 
@@ -69,7 +69,7 @@ class TransactionService {
 
             return res.json({transactions: getAllTransaction })
         } catch (error) {
-            console.log(error)
+            
             return res.status(500).json({error: error})
         }
     }
