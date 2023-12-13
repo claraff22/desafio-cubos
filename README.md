@@ -22,9 +22,11 @@ Este projeto foi desenvolvido como parte do desafio técnico proposto.
 A rota POST /accounts/:accountId/transactions, foi levemente alterada para atender aos requisitos de funcionalidade. Sendo adcionado a coluna "type" com valores possíveis de "debit" ou 
 "credit".
 Request: 
-
+```
 {
   "value": 100.00,
   "type": "debit"
   "description": "Pizzaria São Tomé"
 }
+```
+
