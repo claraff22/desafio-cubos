@@ -60,7 +60,6 @@ class AccountService {
             return res.json({error: error})
         }
     }
-
     
 }
 

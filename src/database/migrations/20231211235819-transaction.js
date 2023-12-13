@@ -12,6 +12,13 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
       },
+      type: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        validate: {
+          isIn: [['debit', 'credit']],
+        },
+      },
       value: {
           type: Sequelize.FLOAT,
           allowNull: false,
@@ -30,6 +37,14 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
       },
+      account_ID: {
+        allowNull: false,
+        type: Sequelize.UUID,
+        references: {
+          model: 'Account',
+          key: 'id'
+        }
+      }
     });
     
   },

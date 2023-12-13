@@ -1,21 +1,26 @@
 import { Model, DataTypes, Sequelize} from "sequelize";
 import config from '../config/database'
+import Accounts from "./account";
 
 
-interface TransactionTypes {
+export interface TransactionTypes {
   id: string;
+  type: string;
   value: number;
   description: string;
   createdAt: Date;
   updatedAt: Date;
+  account_ID: string;
 }
 
 export default class Transaction extends Model<TransactionTypes> implements TransactionTypes {
     id!: string;
+    type!: string;
     value!: number;
     description!: string;
     createdAt!: Date;
     updatedAt!: Date;
+    account_ID!: string;
 }
 
 const sequelize = new Sequelize(config)
@@ -29,6 +34,13 @@ Transaction.init({
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
       },
+    type: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        isIn: [['debit', 'credit']],
+      },
+    },
     value: {
         type: DataTypes.FLOAT,
         allowNull: false,
@@ -47,6 +59,14 @@ Transaction.init({
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
     },
+    account_ID: {
+      allowNull: false,
+      type: DataTypes.UUID,
+      references: {
+        model: 'Account',
+        key: 'id'
+      }
+    }
 
 }, {
     sequelize: sequelize,
@@ -54,3 +74,5 @@ Transaction.init({
     timestamps: false,
     freezeTableName: true,
 })
+
+Accounts.hasMany(Transaction, {foreignKey: 'account_ID'})
